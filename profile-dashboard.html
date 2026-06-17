@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUNRISE TEQUILA — 사원 개인 페이지</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #f7f6f3;
+  --surface:  #ffffff;
+  --hover:    #f1f1ef;
+  --border:   #e9e9e7;
+  --border2:  #d3d2cf;
+  --ink:      #1a1a1a;
+  --ink-mid:  #5a5a5a;
+  --ink-lt:   #9a9a9a;
+  --accent:   #2A7A6A;
+  --accent2:  #1A5E8A;
+  --acc-bg:   rgba(42,122,106,0.09);
+  --acc2-bg:  rgba(26,94,138,0.09);
+  --in-color: #0f7b55;
+  --out-color:#c44327;
+  --font: 'Noto Sans KR', -apple-system, sans-serif;
+  --radius: 6px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);font-family:var(--font);font-size:14px;color:var(--ink);min-height:100vh;padding-bottom:80px;line-height:1.6;}
+.page{max-width:960px;margin:0 auto;padding:32px 24px 0;}
+
+/* ── BLOCK ── */
+.block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden;}
+.block-header{padding:12px 18px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.block-icon{font-size:16px;line-height:1;}
+.block-title{font-size:13px;font-weight:600;color:var(--ink-mid);letter-spacing:0.03em;text-transform:uppercase;}
+.block-body{padding:16px 18px;}
+
+/* ═══════════════════════════════
+   SUNRISE TEQUILA LOGO
+   ═══════════════════════════════ */
+.st-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  user-select: none;
+}
+/* SVG icon container */
+.st-icon {
+  width: 36px; height: 36px;
+  flex-shrink: 0;
+}
+.st-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.st-word1 {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #c97c20;
+}
+.st-word2 {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.38em;
+  color: #8a5a10;
+  opacity: 0.85;
+}
+
+/* header variant — larger for page top */
+.st-logo.large .st-icon { width: 52px; height: 52px; }
+.st-logo.large .st-word1 { font-size: 20px; }
+.st-logo.large .st-word2 { font-size: 13px; }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  text-align: center;
+  margin-bottom: 28px;
+  padding: 28px 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.page-header .st-logo { justify-content: center; }
+.page-header-sub {
+  font-size: 12px;
+  color: var(--ink-lt);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+/* ── ID CARDS ── */
+.id-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.id-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
+.id-card.card-a{border-top:3px solid var(--accent);}
+.id-card.card-b{border-top:3px solid var(--accent2);}
+.id-card-header{padding:10px 14px 8px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.id-card-type{font-size:10px;color:var(--ink-lt);}
+.id-card-body{display:flex;gap:14px;padding:14px;}
+
+/* logo in id card header */
+.id-card-header .st-logo.small .st-icon{width:22px;height:22px;}
+.id-card-header .st-logo.small .st-word1{font-size:9px;letter-spacing:0.18em;}
+.id-card-header .st-logo.small .st-word2{font-size:7px;letter-spacing:0.3em;}
+
+/* ── PHOTO BOX ── */
+.photo-box{
+  flex-shrink:0;width:76px;height:96px;
+  background:var(--hover);border:1.5px dashed var(--border2);border-radius:4px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  cursor:pointer;position:relative;overflow:hidden;transition:border-color 0.15s,background 0.15s;
+}
+.photo-box:hover{border-color:var(--accent);background:var(--acc-bg);}
+.photo-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.photo-box .ph-icon{font-size:18px;z-index:1;}
+.photo-box .ph-txt{font-size:9px;color:var(--ink-lt);z-index:1;text-align:center;line-height:1.4;}
+.photo-box input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2;}
+
+/* ID info */
+.id-info{flex:1;display:flex;flex-direction:column;gap:2px;}
+.id-field{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid var(--border);align-items:baseline;}
+.id-field:last-of-type{border-bottom:none;}
+.id-key{font-size:11px;font-weight:600;color:var(--ink-lt);width:42px;flex-shrink:0;}
+.id-val{font-size:13px;color:var(--ink);flex:1;min-width:0;font-weight:500;}
+.id-val[contenteditable]:focus{outline:none;background:var(--hover);border-radius:3px;padding:1px 4px;}
+.id-footer{display:flex;align-items:center;justify-content:space-between;padding:8px 14px 10px;border-top:1px solid var(--border);}
+.id-no{font-size:10px;color:var(--ink-lt);letter-spacing:0.06em;}
+.id-sig{font-size:11px;color:var(--ink-lt);font-style:italic;}
+.id-sig[contenteditable]:focus{outline:none;background:var(--hover);border-radius:3px;padding:1px 4px;}
+
+/* ── LEDGER ── */
+/* single combined balance */
+.bal-box{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px 20px;margin-bottom:14px;display:flex;align-items:center;gap:20px;
+}
+.bal-box .bal-main{flex:1;}
+.bal-box .bal-lbl{font-size:11px;font-weight:600;color:var(--accent);letter-spacing:0.04em;margin-bottom:2px;}
+.bal-box .bal-amt{font-size:32px;font-weight:700;color:var(--ink);line-height:1;}
+.bal-box .bal-unit{font-size:11px;color:var(--ink-lt);margin-top:2px;}
+.bal-box .bal-breakdown{font-size:11px;color:var(--ink-lt);text-align:right;line-height:1.8;}
+.bal-breakdown span.ba{color:var(--accent);font-weight:600;}
+.bal-breakdown span.bb{color:var(--accent2);font-weight:600;}
+
+.add-row{display:flex;gap:8px;margin-bottom:12px;}
+
+/* table */
+.notion-table{width:100%;border-collapse:collapse;}
+.notion-table thead tr{border-bottom:1px solid var(--border2);}
+.notion-table th{font-size:11px;font-weight:600;color:var(--ink-lt);padding:6px 10px;text-align:left;letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap;}
+.notion-table th.r{text-align:right;}.notion-table th.c{text-align:center;}
+.notion-table tbody tr{border-bottom:1px solid var(--border);transition:background 0.1s;}
+.notion-table tbody tr:hover{background:var(--hover);}
+.notion-table tbody tr.row-a{border-left:2px solid var(--accent);}
+.notion-table tbody tr.row-b{border-left:2px solid var(--accent2);}
+.notion-table td{padding:7px 10px;font-size:13px;color:var(--ink);vertical-align:middle;}
+.notion-table td.r{text-align:right;}.notion-table td.c{text-align:center;}
+.col-date{font-size:12px;color:var(--ink-lt);}
+.col-in{color:var(--in-color);font-weight:600;}
+.col-out{color:var(--out-color);font-weight:600;}
+.col-bal{font-weight:600;}
+.name-tag{display:inline-block;padding:1px 8px;border-radius:3px;font-size:11px;font-weight:600;}
+.tag-a{background:var(--acc-bg);color:var(--accent);}
+.tag-b{background:var(--acc2-bg);color:var(--accent2);}
+.link-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:3px;background:var(--hover);border:1px solid var(--border);color:var(--ink-lt);text-decoration:none;font-size:11px;transition:background 0.12s,color 0.12s;vertical-align:middle;margin-left:4px;}
+.link-icon:hover{background:var(--acc-bg);color:var(--accent);}
+.tbl-scroll{max-height:380px;overflow-y:auto;}
+.tbl-scroll::-webkit-scrollbar{width:6px;}
+.tbl-scroll::-webkit-scrollbar-track{background:transparent;}
+.tbl-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+.empty-notice{padding:32px;text-align:center;color:var(--ink-lt);font-size:13px;}
+
+/* ── BTN ── */
+.n-btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:6px 14px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--surface);font-family:var(--font);font-size:13px;font-weight:500;color:var(--ink);cursor:pointer;white-space:nowrap;transition:background 0.12s,border-color 0.12s;}
+.n-btn:hover{background:var(--hover);}
+.n-btn.filled-a{background:var(--accent);color:#fff;border-color:var(--accent);}
+.n-btn.filled-a:hover{background:#237060;}
+.n-btn.filled-b{background:var(--accent2);color:#fff;border-color:var(--accent2);}
+.n-btn.filled-b:hover{background:#15507a;}
+.n-btn.danger{background:var(--out-color);color:#fff;border-color:var(--out-color);}
+
+/* ── COLLECTION ── */
+.coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:5px;}
+.coll-item{
+  aspect-ratio:1;background:var(--hover);border:1.5px solid var(--border);border-radius:4px;
+  cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:4px 3px 3px;transition:border-color 0.12s,background 0.12s;
+  flex-direction:column;user-select:none;
+}
+.coll-item:hover{border-color:var(--border2);background:#ececea;}
+.coll-item.done-a{background:var(--acc-bg);border-color:var(--accent);}
+.coll-item.done-b{background:var(--acc2-bg);border-color:var(--accent2);}
+.coll-num{font-size:9px;color:var(--ink-lt);position:absolute;top:2px;left:4px;line-height:1;}
+.coll-item.done-a .coll-num{color:var(--accent);opacity:0.7;}
+.coll-item.done-b .coll-num{color:var(--accent2);opacity:0.7;}
+.coll-q{font-size:15px;color:var(--ink-lt);}
+.coll-nwrap{display:none;width:100%;}
+.coll-item.done-a .coll-q,.coll-item.done-b .coll-q{display:none;}
+.coll-item.done-a .coll-nwrap,.coll-item.done-b .coll-nwrap{display:flex;align-items:center;justify-content:center;}
+.coll-inp{width:100%;border:none;background:transparent;font-size:10px;font-family:var(--font);color:var(--ink);font-weight:600;outline:none;text-align:center;padding:0;line-height:1.2;}
+.coll-item.done-a .coll-inp{color:var(--accent);}
+.coll-item.done-b .coll-inp{color:var(--accent2);}
+.coll-inp::placeholder{color:var(--ink-lt);font-weight:400;font-style:italic;font-size:9px;}
+
+/* coll owner popup */
+.coll-popup{
+  display:none;position:fixed;z-index:600;
+  background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);
+  box-shadow:0 4px 20px rgba(0,0,0,0.15);
+  padding:14px;min-width:180px;
+  animation:nPop 0.12s ease;
+}
+.coll-popup.open{display:block;}
+.coll-popup-title{font-size:11px;font-weight:600;color:var(--ink-lt);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em;}
+.coll-popup-btns{display:flex;flex-direction:column;gap:6px;}
+.coll-popup-btn{
+  padding:8px 12px;border-radius:4px;border:1px solid var(--border2);
+  background:var(--surface);font-family:var(--font);font-size:13px;font-weight:500;
+  color:var(--ink);cursor:pointer;text-align:left;transition:all 0.12s;
+}
+.coll-popup-btn:hover{background:var(--hover);}
+.coll-popup-btn.opt-a:hover{background:var(--acc-bg);border-color:var(--accent);color:var(--accent);}
+.coll-popup-btn.opt-b:hover{background:var(--acc2-bg);border-color:var(--accent2);color:var(--accent2);}
+.coll-popup-btn.opt-clear{color:var(--ink-lt);font-size:11px;}
+
+/* ── LOTTO ── */
+.lotto-outer{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.lotto-header{background:#cc2222;padding:6px 14px;display:flex;align-items:center;justify-content:space-between;}
+.lotto-logo{font-weight:700;font-size:18px;color:#fff;font-style:italic;letter-spacing:-0.02em;}
+.lotto-logo small{font-size:12px;vertical-align:super;letter-spacing:0;}
+.lotto-desc{font-size:10px;color:rgba(255,255,255,0.8);text-align:right;line-height:1.4;}
+.lotto-tabs{display:flex;background:#f4f4f4;border-bottom:1px solid #ddd;}
+.lotto-tab{flex:1;padding:6px 4px;text-align:center;font-size:11px;font-weight:600;color:#666;cursor:pointer;border-right:1px solid #ddd;transition:all 0.12s;}
+.lotto-tab:last-child{border-right:none;}
+.lotto-tab.active{background:#fff;color:#cc2222;border-bottom:2px solid #cc2222;}
+.lotto-tab:not(.active):hover{background:#ebebeb;}
+.lotto-panels{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #ddd;}
+.lotto-panel{padding:10px 12px 14px;border-right:1px solid #ddd;}
+.lotto-panel:last-child{border-right:none;}
+.lotto-panel-title{font-size:11px;font-weight:700;text-align:center;padding:3px 8px;margin-bottom:8px;letter-spacing:0.04em;border-radius:2px;}
+.lotto-panel.pa .lotto-panel-title{background:var(--acc-bg);color:var(--accent);border:1px solid var(--accent);}
+.lotto-panel.pb .lotto-panel-title{background:var(--acc2-bg);color:var(--accent2);border:1px solid var(--accent2);}
+.lotto-picks{display:flex;gap:5px;justify-content:center;margin-bottom:10px;}
+.lotto-pick{width:30px;height:30px;border-radius:50%;border:1.5px solid #ccc;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#bbb;background:#f9f9f9;}
+.lotto-pick.sel-a{background:var(--accent);border-color:var(--accent);color:#fff;}
+.lotto-pick.sel-b{background:var(--accent2);border-color:var(--accent2);color:#fff;}
+.lotto-numgrid{display:grid;grid-template-columns:repeat(9,1fr);gap:2px;padding:6px;background:#f8f8f8;border:1px solid #e0e0e0;border-radius:3px;}
+.lotto-num{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#333;border:1px solid #ddd;background:#fff;cursor:pointer;border-radius:2px;transition:all 0.1s;line-height:1;}
+.lotto-num:hover{background:#f0f0f0;border-color:#aaa;}
+.lotto-num.num-a{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700;}
+.lotto-num.num-b{background:var(--accent2);border-color:var(--accent2);color:#fff;font-weight:700;}
+.lotto-num.blocked{opacity:0.3;cursor:not-allowed;}
+
+/* ── MODAL ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.25);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(2px);}
+.overlay.open{display:flex;}
+.n-modal{background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,0.15);padding:24px;width:min(380px,92vw);animation:nPop 0.14s ease;}
+@keyframes nPop{from{transform:scale(0.96) translateY(-8px);opacity:0;}to{transform:scale(1) translateY(0);opacity:1;}}
+.modal-title{font-size:16px;font-weight:700;margin-bottom:18px;color:var(--ink);}
+.mrow{margin-bottom:12px;}
+.mlbl{font-size:11px;font-weight:600;color:var(--ink-lt);margin-bottom:4px;letter-spacing:0.04em;text-transform:uppercase;}
+.n-field{width:100%;padding:8px 10px;font-family:var(--font);font-size:13px;border:1px solid var(--border2);border-radius:var(--radius);background:var(--surface);color:var(--ink);outline:none;transition:border-color 0.13s;}
+.n-field:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--acc-bg);}
+.n-field::placeholder{color:var(--ink-lt);}
+.m-toggle{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.m-foot{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);}
+
+/* ── THEME ── */
+.theme-float{position:fixed;bottom:24px;right:24px;z-index:400;}
+.theme-panel{display:none;position:fixed;bottom:62px;right:24px;width:250px;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);padding:16px;z-index:400;}
+.theme-panel.open{display:block;}
+.tp-title{font-size:12px;font-weight:600;color:var(--ink-mid);margin-bottom:12px;letter-spacing:0.04em;text-transform:uppercase;}
+.tp-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.tp-lbl{font-size:12px;color:var(--ink-mid);}
+.tp-color{width:40px;height:26px;border:1px solid var(--border2);border-radius:4px;cursor:pointer;padding:0;}
+.tp-sep{border:none;border-top:1px solid var(--border);margin:10px 0;}
+.tp-presets{display:flex;flex-wrap:wrap;gap:5px;}
+
+@media(max-width:640px){
+  .id-row{grid-template-columns:1fr;}
+  .lotto-panels{grid-template-columns:1fr;}
+  .lotto-panel{border-right:none;border-bottom:1px solid #ddd;}
+  .page-title{font-size:24px;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══ PAGE HEADER ═══ -->
+  <div class="page-header">
+    <!-- LARGE LOGO -->
+    <div class="st-logo large" style="justify-content:center;">
+      <!-- SVG: sunrise icon -->
+      <svg class="st-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- sky gradient bg -->
+        <defs>
+          <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FF9B3A" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#FFE0A0" stop-opacity="0.08"/>
+          </linearGradient>
+          <linearGradient id="sunG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FFD060"/>
+            <stop offset="100%" stop-color="#E87820"/>
+          </linearGradient>
+        </defs>
+        <!-- horizon line -->
+        <line x1="4" y1="36" x2="48" y2="36" stroke="#C97C20" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- sun half-circle rising above horizon -->
+        <path d="M14 36 A12 12 0 0 1 38 36 Z" fill="url(#sunG)"/>
+        <!-- sun rays -->
+        <line x1="26" y1="10" x2="26" y2="16" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="10" y1="18" x2="14.5" y2="22" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="42" y1="18" x2="37.5" y2="22" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="5"  y1="30" x2="11" y2="30" stroke="#E8A020" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="47" y1="30" x2="41" y2="30" stroke="#E8A020" stroke-width="1.6" stroke-linecap="round"/>
+        <line x1="7"  y1="22" x2="12" y2="25" stroke="#E8A020" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="45" y1="22" x2="40" y2="25" stroke="#E8A020" stroke-width="1.4" stroke-linecap="round"/>
+        <!-- agave leaf hints below horizon -->
+        <path d="M18 36 Q14 44 10 46" stroke="#5A8A40" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <path d="M26 36 Q26 44 26 48" stroke="#5A8A40" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <path d="M34 36 Q38 44 42 46" stroke="#5A8A40" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="st-wordmark">
+        <span class="st-word1">SUNRISE</span>
+        <span class="st-word2">TEQUILA</span>
+      </div>
+    </div>
+    <div class="page-header-sub">사원 개인 페이지</div>
+  </div>
+
+  <!-- ═══ ID CARDS ═══ -->
+  <div class="id-row">
+    <!-- Card A -->
+    <div class="id-card card-a">
+      <div class="id-card-header">
+        <!-- small logo -->
+        <div class="st-logo small">
+          <svg class="st-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="4" y1="36" x2="48" y2="36" stroke="#C97C20" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M14 36 A12 12 0 0 1 38 36 Z" fill="url(#sunG)"/>
+            <line x1="26" y1="10" x2="26" y2="16" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="10" y1="18" x2="14.5" y2="22" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="42" y1="18" x2="37.5" y2="22" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="5" y1="30" x2="11" y2="30" stroke="#E8A020" stroke-width="1.6" stroke-linecap="round"/>
+            <line x1="47" y1="30" x2="41" y2="30" stroke="#E8A020" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M18 36 Q14 44 10 46" stroke="#5A8A40" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+            <path d="M26 36 Q26 44 26 48" stroke="#5A8A40" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <path d="M34 36 Q38 44 42 46" stroke="#5A8A40" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+          </svg>
+          <div class="st-wordmark">
+            <span class="st-word1">SUNRISE</span>
+            <span class="st-word2">TEQUILA</span>
+          </div>
+        </div>
+        <span class="id-card-type">EMPLOYEE CARD</span>
+      </div>
+      <div class="id-card-body">
+        <div class="photo-box" id="photo-a">
+          <span class="ph-icon">📷</span>
+          <span class="ph-txt">사진<br>업로드</span>
+          <input type="file" accept="image/*" onchange="uploadPhoto(this,'photo-a')">
+        </div>
+        <div class="id-info">
+          <div class="id-field"><span class="id-key">이름</span><span class="id-val" contenteditable="true" spellcheck="false" id="name-a" oninput="syncNames()">이름 A</span></div>
+          <div class="id-field"><span class="id-key">나이</span><span class="id-val" contenteditable="true" spellcheck="false">—</span></div>
+          <div class="id-field"><span class="id-key">키</span><span class="id-val" contenteditable="true" spellcheck="false">—</span></div>
+          <div class="id-field"><span class="id-key">직업</span><span class="id-val" contenteditable="true" spellcheck="false">—</span></div>
+        </div>
+      </div>
+      <div class="id-footer">
+        <span class="id-no">No. 001</span>
+        <span class="id-sig" contenteditable="true" spellcheck="false">서명란</span>
+      </div>
+    </div>
+
+    <!-- Card B -->
+    <div class="id-card card-b">
+      <div class="id-card-header">
+        <div class="st-logo small">
+          <svg class="st-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="4" y1="36" x2="48" y2="36" stroke="#C97C20" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M14 36 A12 12 0 0 1 38 36 Z" fill="url(#sunG)"/>
+            <line x1="26" y1="10" x2="26" y2="16" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="10" y1="18" x2="14.5" y2="22" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="42" y1="18" x2="37.5" y2="22" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="5" y1="30" x2="11" y2="30" stroke="#E8A020" stroke-width="1.6" stroke-linecap="round"/>
+            <line x1="47" y1="30" x2="41" y2="30" stroke="#E8A020" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M18 36 Q14 44 10 46" stroke="#5A8A40" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+            <path d="M26 36 Q26 44 26 48" stroke="#5A8A40" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <path d="M34 36 Q38 44 42 46" stroke="#5A8A40" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+          </svg>
+          <div class="st-wordmark">
+            <span class="st-word1">SUNRISE</span>
+            <span class="st-word2">TEQUILA</span>
+          </div>
+        </div>
+        <span class="id-card-type">EMPLOYEE CARD</span>
+      </div>
+      <div class="id-card-body">
+        <div class="photo-box" id="photo-b">
+          <span class="ph-icon">📷</span>
+          <span class="ph-txt">사진<br>업로드</span>
+          <input type="file" accept="image/*" onchange="uploadPhoto(this,'photo-b')">
+        </div>
+        <div class="id-info">
+          <div class="id-field"><span class="id-key">이름</span><span class="id-val" contenteditable="true" spellcheck="false" id="name-b" oninput="syncNames()">이름 B</span></div>
+          <div class="id-field"><span class="id-key">나이</span><span class="id-val" contenteditable="true" spellcheck="false">—</span></div>
+          <div class="id-field"><span class="id-key">키</span><span class="id-val" contenteditable="true" spellcheck="false">—</span></div>
+          <div class="id-field"><span class="id-key">직업</span><span class="id-val" contenteditable="true" spellcheck="false">—</span></div>
+        </div>
+      </div>
+      <div class="id-footer">
+        <span class="id-no">No. 002</span>
+        <span class="id-sig" contenteditable="true" spellcheck="false">서명란</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ LEDGER ═══ -->
+  <div class="block">
+    <div class="block-header">
+      <span class="block-icon">🪙</span>
+      <span class="block-title">코인 기입장</span>
+    </div>
+    <div class="block-body">
+      <!-- combined balance only -->
+      <div class="bal-box">
+        <div class="bal-main">
+          <div class="bal-lbl">합산 코인 잔액</div>
+          <div class="bal-amt" id="bal-total">0</div>
+          <div class="bal-unit">코인</div>
+        </div>
+        <div class="bal-breakdown">
+          <div><span class="ba" id="lbl-a">이름 A</span>&nbsp;<span id="bal-a">0</span></div>
+          <div><span class="bb" id="lbl-b">이름 B</span>&nbsp;<span id="bal-b">0</span></div>
+        </div>
+      </div>
+      <div class="add-row">
+        <button class="n-btn filled-a" onclick="openModal('a')">＋ <span class="btn-name-a">이름 A</span></button>
+        <button class="n-btn filled-b" onclick="openModal('b')">＋ <span class="btn-name-b">이름 B</span></button>
+      </div>
+      <div class="tbl-scroll">
+        <table class="notion-table">
+          <thead>
+            <tr>
+              <th style="width:82px">날짜</th>
+              <th>비고</th>
+              <th class="r" style="width:90px">금액</th>
+              <th class="r" style="width:80px">잔액</th>
+              <th class="c" style="width:80px">작성자</th>
+            </tr>
+          </thead>
+          <tbody id="ledger-body">
+            <tr><td colspan="5"><div class="empty-notice">✏️ 위 버튼으로 첫 내역을 추가해 보세요</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ COLLECTION ═══ -->
+  <div class="block">
+    <div class="block-header">
+      <span class="block-icon">🎁</span>
+      <span class="block-title">컬렉션</span>
+      <span style="font-size:11px;color:var(--ink-lt);margin-left:auto;" id="coll-progress">0 / 50</span>
+    </div>
+    <div class="block-body">
+      <div class="coll-grid" id="coll-grid"></div>
+    </div>
+  </div>
+
+  <!-- ═══ LOTTO ═══ -->
+  <div class="block" style="padding:0;border:none;box-shadow:none;background:transparent;">
+    <div class="block-header" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius) var(--radius) 0 0;border-bottom:none;">
+      <span class="block-icon">🍀</span>
+      <span class="block-title">로또</span>
+    </div>
+    <div class="lotto-outer" style="border-radius:0 0 var(--radius) var(--radius);">
+      <div class="lotto-header">
+        <div class="lotto-logo">Lotto<small>6/50</small></div>
+        <div class="lotto-desc">숫자 선택 (최대 3개)<br>번호를 클릭해 마킹하세요</div>
+      </div>
+      <div class="lotto-tabs">
+        <div class="lotto-tab active" onclick="switchLottoTab(0)">1회차</div>
+        <div class="lotto-tab" onclick="switchLottoTab(1)">2회차</div>
+        <div class="lotto-tab" onclick="switchLottoTab(2)">3회차</div>
+        <div class="lotto-tab" onclick="switchLottoTab(3)">4회차</div>
+      </div>
+      <div class="lotto-panels">
+        <div class="lotto-panel pa">
+          <div class="lotto-panel-title"><span class="lotto-name-a">이름 A</span></div>
+          <div class="lotto-picks" id="picks-a"></div>
+          <div class="lotto-numgrid" id="grid-a"></div>
+        </div>
+        <div class="lotto-panel pb">
+          <div class="lotto-panel-title"><span class="lotto-name-b">이름 B</span></div>
+          <div class="lotto-picks" id="picks-b"></div>
+          <div class="lotto-numgrid" id="grid-b"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<!-- ═══ ENTRY MODAL ═══ -->
+<div class="overlay" id="overlay" onclick="closeOut(event)">
+  <div class="n-modal">
+    <div class="modal-title" id="modal-title">내역 추가</div>
+    <div class="mrow">
+      <div class="mlbl">종류</div>
+      <div class="m-toggle">
+        <button class="n-btn" id="type-inc" onclick="selType('income')">＋ 수입</button>
+        <button class="n-btn" id="type-out" onclick="selType('expense')">－ 지출</button>
+      </div>
+    </div>
+    <div class="mrow">
+      <div class="mlbl">날짜</div>
+      <input type="date" class="n-field" id="m-date">
+    </div>
+    <div class="mrow">
+      <div class="mlbl">비고</div>
+      <input type="text" class="n-field" id="m-memo" placeholder="예: 트윗수, 로또, 자판기…">
+    </div>
+    <div class="mrow">
+      <div class="mlbl">링크 <span style="font-weight:400;text-transform:none;font-size:10px;color:var(--ink-lt)">(선택, URL 입력 시 🔗 아이콘으로 표시)</span></div>
+      <input type="url" class="n-field" id="m-link" placeholder="https://…">
+    </div>
+    <div class="mrow">
+      <div class="mlbl">금액 (코인)</div>
+      <input type="number" class="n-field" id="m-amount" placeholder="0" min="0">
+    </div>
+    <div class="mrow">
+      <div class="mlbl">작성자</div>
+      <div class="m-toggle">
+        <button class="n-btn" id="who-a" onclick="selWho('a')"><span class="who-name-a">이름 A</span></button>
+        <button class="n-btn" id="who-b" onclick="selWho('b')"><span class="who-name-b">이름 B</span></button>
+      </div>
+    </div>
+    <div class="m-foot">
+      <button class="n-btn" onclick="closeModal()">취소</button>
+      <button class="n-btn filled-a" onclick="confirmEntry()">기록</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COLLECTION POPUP ═══ -->
+<div class="coll-popup" id="coll-popup">
+  <div class="coll-popup-title">누구의 아이템인가요?</div>
+  <div class="coll-popup-btns">
+    <button class="coll-popup-btn opt-a" id="popup-btn-a" onclick="assignColl('a')"></button>
+    <button class="coll-popup-btn opt-b" id="popup-btn-b" onclick="assignColl('b')"></button>
+    <button class="coll-popup-btn opt-clear" onclick="assignColl('clear')">🗑 선택 해제</button>
+  </div>
+</div>
+
+<!-- ═══ THEME ═══ -->
+<div class="theme-float">
+  <button class="n-btn" onclick="toggleTheme()">🎨</button>
+</div>
+<div class="theme-panel" id="theme-panel">
+  <div class="tp-title">색상 설정</div>
+  <div class="tp-row"><span class="tp-lbl">배경</span><input type="color" class="tp-color" value="#f7f6f3" oninput="sv('--bg',this.value)"></div>
+  <div class="tp-row"><span class="tp-lbl">카드</span><input type="color" class="tp-color" value="#ffffff" oninput="sv('--surface',this.value)"></div>
+  <div class="tp-row"><span class="tp-lbl">포인트 A</span><input type="color" class="tp-color" value="#2A7A6A" oninput="sv('--accent',this.value)"></div>
+  <div class="tp-row"><span class="tp-lbl">포인트 B</span><input type="color" class="tp-color" value="#1A5E8A" oninput="sv('--accent2',this.value)"></div>
+  <hr class="tp-sep">
+  <div style="font-size:11px;color:var(--ink-lt);margin-bottom:7px;font-weight:600;">빠른 테마</div>
+  <div class="tp-presets">
+    <button class="n-btn" onclick="preset('notion')">노션</button>
+    <button class="n-btn" onclick="preset('mint')">민트</button>
+    <button class="n-btn" onclick="preset('cream')">크림</button>
+    <button class="n-btn" onclick="preset('rose')">로즈</button>
+    <button class="n-btn" onclick="preset('lavender')">라벤더</button>
+    <button class="n-btn" onclick="preset('dark')">다크</button>
+  </div>
+</div>
+
+<script>
+/* ── THEME ── */
+const R=document.documentElement;
+function sv(k,v){R.style.setProperty(k,v);}
+const PRESETS={
+  notion:  {'--bg':'#f7f6f3','--surface':'#ffffff','--border':'#e9e9e7','--ink':'#1a1a1a','--ink-lt':'#9a9a9a'},
+  mint:    {'--bg':'#edf7f4','--surface':'#ffffff','--border':'#c8e8e0','--ink':'#0e2a22','--ink-lt':'#7aaa98'},
+  cream:   {'--bg':'#faf6ed','--surface':'#ffffff','--border':'#e8ddc8','--ink':'#2a1e0e','--ink-lt':'#9a8a68'},
+  rose:    {'--bg':'#fdf0f2','--surface':'#ffffff','--border':'#f0ccd2','--ink':'#2e1018','--ink-lt':'#a87888'},
+  lavender:{'--bg':'#f4f0fc','--surface':'#ffffff','--border':'#ddd4f4','--ink':'#1a1030','--ink-lt':'#8878a8'},
+  dark:    {'--bg':'#191919','--surface':'#242424','--border':'#333333','--ink':'#eeeeee','--ink-lt':'#888888'},
+};
+function preset(n){Object.entries(PRESETS[n]).forEach(([k,v])=>sv(k,v));}
+function toggleTheme(){document.getElementById('theme-panel').classList.toggle('open');}
+document.addEventListener('click',e=>{
+  const p=document.getElementById('theme-panel'),b=document.querySelector('.theme-float');
+  if(p.classList.contains('open')&&!p.contains(e.target)&&!b.contains(e.target))p.classList.remove('open');
+});
+
+/* ── PHOTO ── */
+function uploadPhoto(input,id){
+  const f=input.files[0]; if(!f)return;
+  const url=URL.createObjectURL(f), box=document.getElementById(id);
+  // hide placeholder text
+  const ico=box.querySelector('.ph-icon'), txt=box.querySelector('.ph-txt');
+  if(ico) ico.style.display='none';
+  if(txt) txt.style.display='none';
+  let img=box.querySelector('img');
+  if(!img){ img=document.createElement('img'); box.insertBefore(img, box.querySelector('input')); }
+  img.src=url;
+  img.style.display='block';
+}
+
+/* ── NAME SYNC ── */
+function getName(who){ return document.getElementById('name-'+who).textContent.trim()||(who==='a'?'이름 A':'이름 B'); }
+function syncNames(){
+  const na=getName('a'), nb=getName('b');
+  document.getElementById('lbl-a').textContent=na;
+  document.getElementById('lbl-b').textContent=nb;
+  document.querySelectorAll('.btn-name-a').forEach(el=>el.textContent=na);
+  document.querySelectorAll('.btn-name-b').forEach(el=>el.textContent=nb);
+  document.querySelectorAll('.who-name-a').forEach(el=>el.textContent=na);
+  document.querySelectorAll('.who-name-b').forEach(el=>el.textContent=nb);
+  document.querySelectorAll('.lotto-name-a').forEach(el=>el.textContent=na);
+  document.querySelectorAll('.lotto-name-b').forEach(el=>el.textContent=nb);
+  document.getElementById('popup-btn-a').textContent='● '+na;
+  document.getElementById('popup-btn-b').textContent='● '+nb;
+  renderLedger();
+  buildColl();
+}
+
+/* ── LEDGER ── */
+let entries=[],mWho='a',mType='income',balA=0,balB=0;
+function openModal(who){
+  mWho=who; mType='income';
+  document.getElementById('m-date').value=new Date().toISOString().slice(0,10);
+  document.getElementById('m-memo').value='';
+  document.getElementById('m-link').value='';
+  document.getElementById('m-amount').value='';
+  selType('income'); selWho(who);
+  document.getElementById('modal-title').textContent='내역 추가';
+  document.getElementById('overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('m-memo').focus(),80);
+}
+function selType(t){
+  mType=t;
+  document.getElementById('type-inc').className='n-btn'+(t==='income'?' filled-a':'');
+  document.getElementById('type-out').className='n-btn'+(t==='expense'?' danger':'');
+}
+function selWho(w){
+  mWho=w;
+  document.getElementById('who-a').className='n-btn'+(w==='a'?' filled-a':'');
+  document.getElementById('who-b').className='n-btn'+(w==='b'?' filled-b':'');
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('open'); }
+function closeOut(e){ if(e.target===document.getElementById('overlay'))closeModal(); }
+function confirmEntry(){
+  const date=document.getElementById('m-date').value||'-';
+  const memo=document.getElementById('m-memo').value.trim()||'(메모 없음)';
+  const link=document.getElementById('m-link').value.trim();
+  const amount=parseInt(document.getElementById('m-amount').value)||0;
+  if(amount<=0){alert('금액을 입력해 주세요.');return;}
+  const isInc=mType==='income';
+  if(mWho==='a') balA+=isInc?amount:-amount;
+  else           balB+=isInc?amount:-amount;
+  entries.push({date,memo,link,amount,type:mType,who:mWho,snapA:balA,snapB:balB});
+  closeModal(); renderLedger(); updateBal();
+}
+function updateBal(){
+  document.getElementById('bal-a').textContent=balA.toLocaleString();
+  document.getElementById('bal-b').textContent=balB.toLocaleString();
+  document.getElementById('bal-total').textContent=(balA+balB).toLocaleString();
+}
+function renderLedger(){
+  const body=document.getElementById('ledger-body');
+  if(!entries.length){
+    body.innerHTML='<tr><td colspan="5"><div class="empty-notice">✏️ 위 버튼으로 첫 내역을 추가해 보세요</div></td></tr>';
+    return;
+  }
+  body.innerHTML='';
+  [...entries].reverse().forEach(e=>{
+    const isInc=e.type==='income', bal=e.who==='a'?e.snapA:e.snapB;
+    const amt=isInc?`<span class="col-in">+${e.amount.toLocaleString()}</span>`:`<span class="col-out">-${e.amount.toLocaleString()}</span>`;
+    const linkHtml=e.link?`<a href="${e.link}" target="_blank" rel="noopener" class="link-icon" title="${e.link}">🔗</a>`:'';
+    const tr=document.createElement('tr');
+    tr.className='row-'+e.who;
+    const nm=getName(e.who);
+    tr.innerHTML=`<td class="col-date">${e.date}</td><td>${e.memo}${linkHtml}</td><td class="r">${amt}</td><td class="r col-bal">${bal.toLocaleString()}</td><td class="c"><span class="name-tag tag-${e.who}">${nm}</span></td>`;
+    body.appendChild(tr);
+  });
+}
+
+/* ── COLLECTION ── */
+const COLL=50;
+// each slot: {owner: null|'a'|'b', name:''}
+const collSlots=Array.from({length:COLL},()=>({owner:null,name:''}));
+let popupIdx=null;
+
+function buildColl(){
+  const grid=document.getElementById('coll-grid');
+  grid.innerHTML='';
+  let done=0;
+  collSlots.forEach((slot,i)=>{
+    if(slot.owner) done++;
+    const el=document.createElement('div');
+    el.className='coll-item'+(slot.owner?' done-'+slot.owner:'');
+    el.innerHTML=`<div class="coll-num">[${i+1}]</div>
+      <span class="coll-q">?</span>
+      <div class="coll-nwrap"><input class="coll-inp" placeholder="이름" value="${slot.name.replace(/"/g,'&quot;')}" data-idx="${i}"></div>`;
+    el.addEventListener('click',ev=>{
+      if(ev.target.classList.contains('coll-inp'))return;
+      openCollPopup(i, el);
+    });
+    grid.appendChild(el);
+  });
+  document.getElementById('coll-progress').textContent=done+' / '+COLL;
+  // bind inputs
+  grid.querySelectorAll('.coll-inp').forEach(inp=>{
+    inp.addEventListener('input',ev=>{ collSlots[+ev.target.dataset.idx].name=ev.target.value; });
+    inp.addEventListener('click',ev=>ev.stopPropagation());
+  });
+  // update popup labels
+  document.getElementById('popup-btn-a').textContent='● '+getName('a');
+  document.getElementById('popup-btn-b').textContent='● '+getName('b');
+}
+
+function openCollPopup(idx, el){
+  popupIdx=idx;
+  const popup=document.getElementById('coll-popup');
+  document.getElementById('popup-btn-a').textContent='● '+getName('a');
+  document.getElementById('popup-btn-b').textContent='● '+getName('b');
+  const rect=el.getBoundingClientRect();
+  const scrollY=window.scrollY||0, scrollX=window.scrollX||0;
+  let top=rect.bottom+scrollY+4, left=rect.left+scrollX;
+  // keep in viewport
+  if(left+200>window.innerWidth+scrollX) left=window.innerWidth+scrollX-210;
+  popup.style.top=top+'px'; popup.style.left=left+'px';
+  popup.classList.add('open');
+}
+
+function assignColl(who){
+  if(popupIdx===null)return;
+  if(who==='clear') collSlots[popupIdx].owner=null;
+  else              collSlots[popupIdx].owner=who;
+  document.getElementById('coll-popup').classList.remove('open');
+  popupIdx=null;
+  buildColl();
+}
+
+// close popup on outside click
+document.addEventListener('click',e=>{
+  const popup=document.getElementById('coll-popup');
+  if(popup.classList.contains('open')&&!popup.contains(e.target)){
+    popup.classList.remove('open'); popupIdx=null;
+  }
+});
+
+/* ── LOTTO ── */
+const ld=Array.from({length:4},()=>({a:new Set(),b:new Set()}));
+let lt=0;
+function switchLottoTab(t){
+  lt=t;
+  document.querySelectorAll('.lotto-tab').forEach((el,i)=>el.classList.toggle('active',i===t));
+  renderLotto();
+}
+function renderLotto(){
+  const td=ld[lt];
+  ['a','b'].forEach(who=>{
+    const picks=document.getElementById('picks-'+who); picks.innerHTML='';
+    const sel=[...td[who]].sort((a,b)=>a-b);
+    for(let i=0;i<3;i++){
+      const v=sel[i]??null, b=document.createElement('div');
+      b.className='lotto-pick'+(v!==null?' sel-'+who:'');
+      b.textContent=v!==null?v:'?'; picks.appendChild(b);
+    }
+    const grid=document.getElementById('grid-'+who); grid.innerHTML='';
+    const maxed=td[who].size>=3;
+    for(let n=1;n<=50;n++){
+      const btn=document.createElement('div');
+      btn.className='lotto-num'+(td[who].has(n)?' num-'+who:maxed?' blocked':'');
+      btn.textContent=n;
+      btn.onclick=()=>{ const s=td[who]; s.has(n)?s.delete(n):(s.size<3&&s.add(n)); renderLotto(); };
+      grid.appendChild(btn);
+    }
+  });
+}
+
+/* ── INIT ── */
+buildColl(); renderLotto(); updateBal(); renderLedger();
+</script>
+</body>
+</html>
